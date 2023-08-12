@@ -6,37 +6,10 @@ use axum::{
     routing::{get, post},
     Router, Server,
 };
+use obj_down_up_load::Config;
 use serde::Deserialize;
 use std::net::SocketAddr;
-use tokio::sync::OnceCell;
 use tokio_util::io::ReaderStream;
-
-#[derive(Deserialize, Debug)]
-struct Config {
-    port: u16,
-    auth_token: String,
-    data_dir: String,
-}
-static CONFIG: OnceCell<Config> = OnceCell::const_new();
-impl Config {
-    #[cfg(debug_assertions)]
-    const CONFIG_PATH: &str = "config.dev.toml";
-    #[cfg(not(debug_assertions))]
-    const CONFIG_PATH: &str = "/etc/obj-down-up-load/config.toml";
-
-    fn init() {
-        println!("Reading config from {}...", Self::CONFIG_PATH);
-        let config = toml::from_str(
-            &std::fs::read_to_string(Self::CONFIG_PATH).expect("Unable to read config"),
-        )
-        .expect("Invalid TOML config");
-        CONFIG.set(config).unwrap();
-    }
-
-    fn get() -> &'static Self {
-        CONFIG.get().unwrap()
-    }
-}
 
 #[tokio::main]
 async fn main() {
