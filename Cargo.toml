@@ -1,8 +1,20 @@
 [package]
+edition = "2021"
 name = "obj-down-up-load"
 version = "0.1.0"
-edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+bin-server = ["axum", "tokio", "tokio-util", "serde", "toml"]
 
 [dependencies]
+axum = {version = "0.6.20", features = ["multipart", "macros"], optional = true}
+serde = {version = "1.0", features = ["derive"], optional = true}
+tokio = {version = "1.30.0", features = ["full"], optional = true}
+tokio-util = {version = "0.7.8", features = ["io"], optional = true}
+toml = {version = "0.7.6", optional = true}
+
+[[bin]]
+bench = false
+name = "server"
+required-features = ["bin-server"]
+test = false
