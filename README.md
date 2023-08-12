@@ -17,4 +17,12 @@ $ curl http://localhost:3000/obj-load/download?token=12345&filename=name-of-the-
 
 ### Client
 
-TODO
+```sh
+$ cargo run --bin obj-upload --features=bin-obj-upload -- README.md
+Uploading file 'README.md' as README.md to configured server
+OK
+
+$ cargo run --bin obj-download --features=bin-obj-download -- README.md
+Downloading file 'README.md' to the current directory
+OK
+```
