@@ -36,3 +36,18 @@ bench = false
 name = "obj-download"
 required-features = ["bin-obj-download"]
 test = false
+
+[package.metadata.deb]
+assets = [
+  ["target/release/server", "usr/bin/obj_load_server", "755"],
+  ["config.server.toml", "etc/obj_load/config.toml", "644"],
+  ["debian/obj_load.service", "lib/systemd/system/obj_load.service", "644"],
+]
+copyright = "2023, Ilya Bylich."
+depends = "$auto, systemd"
+extended-description = "A tiny personal service for file sharing."
+features = ["bin-server"]
+maintainer = "Obj-oad developer <ibylich@gmail.com>"
+maintainer-scripts = "debian/scripts"
+priority = "optional"
+section = "admin"

@@ -1,0 +1,34 @@
+name: release
+
+on:
+  push:
+    branches: [ master ]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  release-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: install rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: install cargo-deb
+        run: cargo install cargo-deb
+
+      - name: build
+        run: cargo deb
+
+      - name: release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifactErrorsFailBuild: true
+          tag: latest
+          artifacts: target/release/server,target/debian/obj_load_0.1.0_amd64.deb
+          token: ${{ secrets.GITHUB_TOKEN }}

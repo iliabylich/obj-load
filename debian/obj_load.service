@@ -1,0 +1,12 @@
+[Unit]
+AssertPathExists=/usr/bin/obj_load_server
+
+[Service]
+WorkingDirectory=~
+ExecStart=/usr/bin/obj_load_server
+Restart=always
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target
