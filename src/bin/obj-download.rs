@@ -1,9 +1,9 @@
-use obj_down_up_load::{filepath_from_args, Config};
+use obj_load::{filepath_from_args, Config};
 use reqwest::blocking::Client;
 
 pub fn main() {
     Config::init();
-    let url = format!("{}/obj-down-up-load/download", Config::get().server);
+    let url = format!("{}/obj-load/download", Config::get().server);
 
     let filename = filepath_from_args();
 

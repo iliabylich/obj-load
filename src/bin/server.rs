@@ -6,7 +6,7 @@ use axum::{
     routing::{get, post},
     Router, Server,
 };
-use obj_down_up_load::Config;
+use obj_load::Config;
 use serde::Deserialize;
 use std::net::SocketAddr;
 use tokio_util::io::ReaderStream;
@@ -16,8 +16,8 @@ async fn main() {
     Config::init();
 
     let app = Router::new()
-        .route("/obj-down-up-load/upload", post(upload))
-        .route("/obj-down-up-load/download", get(download));
+        .route("/obj-load/upload", post(upload))
+        .route("/obj-load/download", get(download));
 
     let addr = SocketAddr::from(([127, 0, 0, 1], Config::get().port));
 

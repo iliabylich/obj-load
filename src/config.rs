@@ -28,7 +28,7 @@ impl Config {
 
     #[cfg(not(debug_assertions))]
     fn path() -> &'static str {
-        "/etc/obj-down-up-load/config.toml"
+        "/etc/obj-load/config.toml"
     }
 
     pub fn init() {

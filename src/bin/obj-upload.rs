@@ -1,10 +1,10 @@
-use obj_down_up_load::{filepath_from_args, Config};
+use obj_load::{filepath_from_args, Config};
 use reqwest::blocking::multipart;
 use reqwest::blocking::Client;
 
 pub fn main() {
     Config::init();
-    let url = format!("{}/obj-down-up-load/upload", Config::get().server);
+    let url = format!("{}/obj-load/upload", Config::get().server);
     let filepath = filepath_from_args();
 
     let filename = std::path::Path::new(&filepath)
