@@ -43,31 +43,31 @@ $ dpkg -i obj-load_0.1.0_amd64.deb
 To get client on x86_64-apple-darwin (Mac on Intel):
 
 ```sh
-$ sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-x86_64-apple-darwin -O /usr/local/bin/obj-upload
-$ sudo chmod +x /usr/local/bin/obj-upload
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-x86_64-apple-darwin -O /usr/local/bin/obj-upload
+sudo chmod +x /usr/local/bin/obj-upload
 
-$ sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-x86_64-apple-darwin -O /usr/local/bin/obj-download
-$ sudo chmod +x /usr/local/bin/obj-download
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-x86_64-apple-darwin -O /usr/local/bin/obj-download
+sudo chmod +x /usr/local/bin/obj-download
 ```
 
 To get client on aarch64-apple-darwin (Mac M1):
 
 ```sh
-$ sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-aarch64-apple-darwin -O /usr/local/bin/obj-upload
-$ sudo chmod +x /usr/local/bin/obj-upload
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-aarch64-apple-darwin -O /usr/local/bin/obj-upload
+sudo chmod +x /usr/local/bin/obj-upload
 
-$ sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-aarch64-apple-darwin -O /usr/local/bin/obj-download
-$ sudo chmod +x /usr/local/bin/obj-download
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-aarch64-apple-darwin -O /usr/local/bin/obj-download
+sudo chmod +x /usr/local/bin/obj-download
 ```
 
 To get client on Linux with glibc (x86_64-unknown-linux-gnu):
 
 ```sh
-$ sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-x86_64-unknown-linux-gnu -O /usr/local/bin/obj-upload
-$ sudo chmod +x /usr/local/bin/obj-upload
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-x86_64-unknown-linux-gnu -O /usr/local/bin/obj-upload
+sudo chmod +x /usr/local/bin/obj-upload
 
-$ sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-x86_64-unknown-linux-gnu -O /usr/local/bin/obj-download
-$ sudo chmod +x /usr/local/bin/obj-download
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-x86_64-unknown-linux-gnu -O /usr/local/bin/obj-download
+sudo chmod +x /usr/local/bin/obj-download
 ```
 
 and run
