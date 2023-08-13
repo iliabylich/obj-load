@@ -1,11 +1,16 @@
-use obj_load::{filepath_from_args, Config};
+use obj_load::{filepath_from_args, zip, Config};
 use reqwest::blocking::multipart;
 use reqwest::blocking::Client;
 
 pub fn main() {
     Config::init();
     let url = format!("{}/obj-load/upload", Config::get().server);
-    let filepath = filepath_from_args();
+    let mut filepath = filepath_from_args();
+
+    if std::path::Path::new(&filepath).is_dir() {
+        println!("It's a folder! Zipping..");
+        filepath = zip(&filepath);
+    }
 
     let filename = std::path::Path::new(&filepath)
         .file_name()

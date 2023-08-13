@@ -1,4 +1,4 @@
-use obj_load::{filepath_from_args, Config};
+use obj_load::{filepath_from_args, unzip, Config};
 use reqwest::blocking::Client;
 
 pub fn main() {
@@ -20,11 +20,16 @@ pub fn main() {
 
     if res.status() == 200 {
         let bytes = res.bytes().unwrap();
-        std::fs::write(filename, bytes).unwrap();
+        std::fs::write(&filename, bytes).unwrap();
         println!("OK");
     } else {
         eprintln!("Failed to download file");
         dbg!(res);
         std::process::exit(1);
+    }
+
+    if filename.ends_with(".zip") {
+        println!("It's a zip file! Unzipping..");
+        unzip(&filename);
     }
 }
