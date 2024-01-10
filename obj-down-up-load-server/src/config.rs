@@ -3,15 +3,8 @@ use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Config {
-    #[cfg(feature = "bin-server")]
     pub port: u16,
-
-    #[cfg(feature = "bin-server")]
     pub data_dir: String,
-
-    #[cfg(feature = "bin-client")]
-    pub server: String,
-
     pub auth_token: String,
 }
 static CONFIG: OnceCell<Config> = OnceCell::new();
@@ -19,11 +12,7 @@ static CONFIG: OnceCell<Config> = OnceCell::new();
 impl Config {
     #[cfg(debug_assertions)]
     fn path() -> &'static str {
-        if cfg!(feature = "bin-server") {
-            "config.server.toml"
-        } else {
-            "config.client.toml"
-        }
+        "config.server.toml"
     }
 
     #[cfg(not(debug_assertions))]

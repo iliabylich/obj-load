@@ -1,0 +1,38 @@
+[package]
+name = "obj-down-up-load-server"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+axum = { workspace = true }
+tokio = { workspace = true }
+tokio-util = { workspace = true }
+serde = { workspace = true }
+once_cell = { workspace = true }
+toml = { workspace = true }
+
+[package.metadata.deb]
+assets = [
+  [
+    "target/release/obj-down-up-load-server",
+    "usr/bin/obj-down-up-load-server",
+    "755",
+  ],
+  [
+    "../config.server.toml",
+    "etc/obj-down-up-load/config.example.toml",
+    "644",
+  ],
+  [
+    "../debian/obj-down-up-load-server.service",
+    "lib/systemd/system/obj-down-up-load-server.service",
+    "644",
+  ],
+]
+copyright = "2023, Ilya Bylich."
+depends = "$auto, systemd"
+extended-description = "A tiny personal service for file sharing."
+maintainer = "Obj-load developer <ibylich@gmail.com>"
+maintainer-scripts = "debian/scripts"
+priority = "optional"
+section = "admin"

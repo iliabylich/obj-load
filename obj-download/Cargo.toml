@@ -1,0 +1,8 @@
+[package]
+name = "obj-download"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+client-core = { path = "../client-core" }
+reqwest = { workspace = true }

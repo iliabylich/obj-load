@@ -1,73 +1,23 @@
-[package]
+[workspace]
+members = [
+  "client-core",
+  "obj-down-up-load-server",
+  "obj-download",
+  "obj-upload",
+]
+resolver = "2"
+
+[workspace.package]
 edition = "2021"
-name = "obj-load"
 version = "0.1.0"
 
-[features]
-bin-client = ["reqwest", "serde", "toml", "zip", "walkdir"]
-bin-obj-download = ["bin-client"]
-bin-obj-upload = ["bin-client"]
-bin-server = ["axum", "tokio", "tokio-util", "serde", "toml"]
-
-[dependencies]
+[workspace.dependencies]
 once_cell = "1.19"
-axum = { version = "0.7", features = ["multipart", "macros"], optional = true }
-reqwest = { version = "0.11", features = [
-  "blocking",
-  "multipart",
-], optional = true }
-serde = { version = "1.0", features = ["derive"], optional = true }
-tokio = { version = "1.0", features = [
-  "rt-multi-thread",
-  "macros",
-  "fs",
-], optional = true }
-tokio-util = { version = "0.7", features = ["io"], optional = true }
-toml = { version = "0.8", optional = true }
-walkdir = { version = "2", optional = true }
-zip = { version = "0.6", optional = true }
-
-[[bin]]
-bench = false
-name = "server"
-required-features = ["bin-server"]
-test = false
-
-[[bin]]
-bench = false
-name = "obj-upload"
-required-features = ["bin-obj-upload"]
-test = false
-
-[[bin]]
-bench = false
-name = "obj-download"
-required-features = ["bin-obj-download"]
-test = false
-
-[package.metadata.deb]
-assets = [
-  [
-    "target/release/server",
-    "usr/bin/obj_load_server",
-    "755",
-  ],
-  [
-    "config.server.toml",
-    "etc/obj_load/config.toml",
-    "644",
-  ],
-  [
-    "debian/obj_load.service",
-    "lib/systemd/system/obj_load.service",
-    "644",
-  ],
-]
-copyright = "2023, Ilya Bylich."
-depends = "$auto, systemd"
-extended-description = "A tiny personal service for file sharing."
-features = ["bin-server"]
-maintainer = "Obj-oad developer <ibylich@gmail.com>"
-maintainer-scripts = "debian/scripts"
-priority = "optional"
-section = "admin"
+axum = { version = "0.7", features = ["multipart", "macros"] }
+reqwest = { version = "0.11", features = ["blocking", "multipart"] }
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.0", features = ["rt-multi-thread", "macros", "fs"] }
+tokio-util = { version = "0.7", features = ["io"] }
+toml = { version = "0.8" }
+walkdir = { version = "2" }
+zip = { version = "0.6" }

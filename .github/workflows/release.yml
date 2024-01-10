@@ -26,10 +26,10 @@ jobs:
         run: cargo install cargo-deb
 
       - name: build
-        run: cargo deb --deb-revision="$(date +%s)"
+        run: cargo deb --deb-revision="$(date +%s)" -p obj-down-up-load-server
 
       - name: give binary a representative name
-        run: cp target/release/server server-x86_64-unknown-linux-gnu
+        run: cp target/release/obj-down-up-load-server server-x86_64-unknown-linux-gnu
 
       - name: release
         uses: ncipollo/release-action@v1
@@ -62,11 +62,8 @@ jobs:
           override: true
           targets: ${{ matrix.build.target }}
 
-      - name: compile obj-download
-        run: cargo build --bin obj-download --features=bin-obj-download --release --target ${{ matrix.build.target }}
-
-      - name: compile obj-upload
-        run: cargo build --bin obj-upload --features=bin-obj-upload --release --target ${{ matrix.build.target }}
+      - name: compile
+        run: cargo build --release -p obj-download -p obj-upload --target ${{ matrix.build.target }}
 
       - name: give executables representable name
         run: |

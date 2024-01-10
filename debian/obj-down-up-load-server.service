@@ -1,9 +1,9 @@
 [Unit]
-AssertPathExists=/usr/bin/obj_load_server
+AssertPathExists=/usr/bin/obj-down-up-load-server
 
 [Service]
 WorkingDirectory=~
-ExecStart=/usr/bin/obj_load_server
+ExecStart=/usr/bin/obj-down-up-load-server
 Restart=always
 PrivateTmp=true
 NoNewPrivileges=true
