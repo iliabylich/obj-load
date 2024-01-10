@@ -3,8 +3,8 @@
 ### Server
 
 ```sh
-$ cargo run --bin server --features=bin-server
-Reading config from config.dev.toml...
+$ cargo run --p obj-down-up-load-server
+Reading config from config.server.toml...
 Running server on http://127.0.0.1:3000 ...
 ```
 
@@ -18,55 +18,55 @@ $ curl http://localhost:3000/obj-load/download?token=12345&filename=name-of-the-
 ### Client
 
 ```sh
-$ cargo run --bin obj-upload --features=bin-obj-upload -- README.md
+$ cargo run --p obj-upload README.md
 Uploading file 'README.md' as README.md to configured server
 OK
 
-$ cargo run --bin obj-download --features=bin-obj-download -- README.md
+$ cargo run -p obj-download README.md
 Downloading file 'README.md' to the current directory
 OK
 ```
 
 # Installing pre-compiled binaries
 
-1. Install server package
+1. Install server package from [the latest release](https://github.com/iliabylich/obj-load/releases/tag/latest)
 
 ```sh
-$ wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-load_0.1.0_amd64.deb
-$ dpkg -i obj-load_0.1.0_amd64.deb
+$ wget <URL_OF_DEV>
+$ dpkg -i obj-down-up-load-server_<VERSION>_amd64.deb
 ```
 
-2. configure `/etc/obj_load/config.toml`
+2. copy `/etc/obj-down-up-load/config.example.toml` to `/etc/obj-down-up-load/config.toml` and edit it as you need
 3. enable systemctl server
 4. setup Nginx proxy
 
 To get client on x86_64-apple-darwin (Mac on Intel):
 
 ```sh
-sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-x86_64-apple-darwin -O /usr/local/bin/obj-upload
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest-client/obj-upload-x86_64-apple-darwin -O /usr/local/bin/obj-upload
 sudo chmod +x /usr/local/bin/obj-upload
 
-sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-x86_64-apple-darwin -O /usr/local/bin/obj-download
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest-client/obj-download-x86_64-apple-darwin -O /usr/local/bin/obj-download
 sudo chmod +x /usr/local/bin/obj-download
 ```
 
 To get client on aarch64-apple-darwin (Mac M1):
 
 ```sh
-sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-aarch64-apple-darwin -O /usr/local/bin/obj-upload
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest-client/obj-upload-aarch64-apple-darwin -O /usr/local/bin/obj-upload
 sudo chmod +x /usr/local/bin/obj-upload
 
-sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-aarch64-apple-darwin -O /usr/local/bin/obj-download
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest-client/obj-download-aarch64-apple-darwin -O /usr/local/bin/obj-download
 sudo chmod +x /usr/local/bin/obj-download
 ```
 
 To get client on Linux with glibc (x86_64-unknown-linux-gnu):
 
 ```sh
-sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-upload-x86_64-unknown-linux-gnu -O /usr/local/bin/obj-upload
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest-client/obj-upload-x86_64-unknown-linux-gnu -O /usr/local/bin/obj-upload
 sudo chmod +x /usr/local/bin/obj-upload
 
-sudo wget https://github.com/iliabylich/obj-load/releases/download/latest/obj-download-x86_64-unknown-linux-gnu -O /usr/local/bin/obj-download
+sudo wget https://github.com/iliabylich/obj-load/releases/download/latest-client/obj-download-x86_64-unknown-linux-gnu -O /usr/local/bin/obj-download
 sudo chmod +x /usr/local/bin/obj-download
 ```
 
