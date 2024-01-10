@@ -11,11 +11,7 @@ static CONFIG: OnceCell<Config> = OnceCell::new();
 impl Config {
     #[cfg(debug_assertions)]
     fn path() -> &'static str {
-        if cfg!(feature = "bin-server") {
-            "config.server.toml"
-        } else {
-            "config.client.toml"
-        }
+        "config.client.toml"
     }
 
     #[cfg(not(debug_assertions))]
