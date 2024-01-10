@@ -1,14 +1,14 @@
 use axum::{
-    body::StreamBody,
+    body::Body,
     extract::{Multipart, Query},
     http::{header, Response, StatusCode},
     response::IntoResponse,
     routing::{get, post},
-    Router, Server,
+    Router,
 };
 use obj_load::Config;
 use serde::Deserialize;
-use std::net::SocketAddr;
+use tokio::net::TcpListener;
 use tokio_util::io::ReaderStream;
 
 #[tokio::main]
@@ -19,15 +19,11 @@ async fn main() {
         .route("/obj-load/upload", post(upload))
         .route("/obj-load/download", get(download));
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], Config::get().port));
+    let port = Config::get().port;
+    let listener = TcpListener::bind(format!("0.0.0.0:{port}")).await.unwrap();
+    println!("Listening on {}", listener.local_addr().unwrap());
 
-    println!(
-        "Running server on http://127.0.0.1:{} ...",
-        Config::get().port
-    );
-
-    Server::bind(&addr)
-        .serve(app.into_make_service())
+    axum::serve(listener, app)
         .await
         .expect("Failed to spawn web server");
 }
@@ -79,7 +75,8 @@ async fn download(
         Ok(file) => file,
         Err(_err) => return Err((StatusCode::NOT_FOUND, "File not found")),
     };
-    let mut res = Response::new(StreamBody::new(ReaderStream::new(file)));
+    let body = Body::from_stream(ReaderStream::new(file));
+    let mut res = Response::new(body);
     res.headers_mut().insert(
         header::CONTENT_TYPE,
         "application/octet-stream".parse().unwrap(),
