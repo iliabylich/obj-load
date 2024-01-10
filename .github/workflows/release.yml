@@ -18,9 +18,7 @@ jobs:
       - name: install rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
           toolchain: stable
-          override: true
 
       - name: install cargo-deb
         run: cargo install cargo-deb
@@ -67,9 +65,7 @@ jobs:
       - name: install rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
           toolchain: stable
-          override: true
           targets: ${{ matrix.build.target }}
 
       - name: compile
