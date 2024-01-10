@@ -13,16 +13,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: install rust
         uses: dtolnay/rust-toolchain@stable
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
 
       - name: install cargo-deb
         run: cargo install cargo-deb
 
       - name: build
-        run: cargo deb
+        run: cargo deb --deb-revision="$(date +%s)"
 
       - name: give binary a representative name
         run: cp target/release/server server-x86_64-unknown-linux-gnu
@@ -32,8 +36,9 @@ jobs:
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
+          removeArtifacts: true
           tag: latest
-          artifacts: server-x86_64-unknown-linux-gnu,target/debian/obj-load_0.1.0_amd64.deb
+          artifacts: server-x86_64-unknown-linux-gnu,target/debian/*.deb
           token: ${{ secrets.GITHUB_TOKEN }}
 
   release-client:
@@ -47,11 +52,14 @@ jobs:
           - { os: macos-latest,  target: aarch64-apple-darwin     }
     steps:
       - name: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: install rust
         uses: dtolnay/rust-toolchain@stable
         with:
+          profile: minimal
+          toolchain: stable
+          override: true
           targets: ${{ matrix.build.target }}
 
       - name: compile obj-download
@@ -70,6 +78,6 @@ jobs:
         with:
           allowUpdates: true
           artifactErrorsFailBuild: true
-          tag: latest
+          tag: latest-client
           artifacts: obj-download-${{ matrix.build.target }},obj-upload-${{ matrix.build.target }}
           token: ${{ secrets.GITHUB_TOKEN }}
