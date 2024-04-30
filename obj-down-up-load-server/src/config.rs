@@ -8,6 +8,7 @@ pub struct Config {
     pub auth_token: String,
 }
 static CONFIG: OnceCell<Config> = OnceCell::new();
+const DEFAULT_CONFIG: &str = include_str!("../../config.server.toml");
 
 impl Config {
     #[cfg(debug_assertions)]
@@ -22,6 +23,10 @@ impl Config {
 
     pub fn init() {
         println!("Reading config from {}...", Self::path());
+        if !std::path::Path::new(Self::path()).exists() {
+            std::fs::write(Self::path(), DEFAULT_CONFIG).unwrap()
+        }
+
         let config =
             toml::from_str(&std::fs::read_to_string(Self::path()).expect("Unable to read config"))
                 .expect("Invalid TOML config");

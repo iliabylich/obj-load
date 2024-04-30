@@ -19,11 +19,6 @@ assets = [
     "755",
   ],
   [
-    "../config.server.toml",
-    "etc/obj-down-up-load/config.example.toml",
-    "644",
-  ],
-  [
     "../debian/obj-down-up-load-server.service",
     "lib/systemd/system/obj-down-up-load-server.service",
     "644",
