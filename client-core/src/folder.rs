@@ -1,6 +1,7 @@
 use std::io::{Read, Write};
 
 use walkdir::WalkDir;
+use zip::write::FileOptions;
 
 pub fn zip(relative_path: &str) -> String {
     let dir_name = std::path::Path::new(relative_path)
@@ -13,7 +14,7 @@ pub fn zip(relative_path: &str) -> String {
     let zip_file = std::fs::File::create(&out_zip_file_name).unwrap();
 
     let mut zip_writer = zip::ZipWriter::new(zip_file);
-    let zip_options =
+    let zip_options: FileOptions<()> =
         zip::write::FileOptions::default().compression_method(zip::CompressionMethod::Stored);
 
     let mut buffer = Vec::new();
